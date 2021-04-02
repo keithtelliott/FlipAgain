@@ -13,8 +13,10 @@ Browse existing flashcards one-by-one, flipping them from front to back.
 
 ### No-Signup & Local Storage
 
-Create flashcards and store them in web browser local storage, without sign-up requirements.  Minimize friction against first-use.  
+Create flashcards and store them in browser-based local storage, without sign-up requirements.  Minimize friction against first-use.  
 
 ### Signup & Share
 
-Signup with a username to store flashcards in cloud-based storage.  Share your flashcards with friends.
+Signup with a username to store flashcards in cloud-based storage.  Share flashcards with friends.
+
+Keith Elliott, April 2, 2021
