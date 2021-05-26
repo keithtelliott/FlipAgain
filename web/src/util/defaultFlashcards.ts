@@ -71,7 +71,7 @@ const defaultFlashcards: FlashcardInterface[] = [
   {
     id: '9a',
     front:
-      'Another technical note:  I am developing this app in public.  You can checkout the code...',
+      'Another technical note:  I am developing this app with encouragement from my friends in the RedwoodJS community.  You can checkout the code...',
     back: '...at github.com/keithtelliott/FlipAgain',
     topic: 'Intro',
     username: 'local',
