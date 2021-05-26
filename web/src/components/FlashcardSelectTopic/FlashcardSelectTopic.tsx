@@ -1,18 +1,17 @@
 import { Button, IconButton } from '@chakra-ui/button'
 import { useDisclosure } from '@chakra-ui/hooks'
 import { HamburgerIcon } from '@chakra-ui/icons'
-import { Box, Divider, Link, Text } from '@chakra-ui/layout'
+import { Box, Divider, Link as ChakraLink, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { Tooltip } from '@chakra-ui/tooltip'
-import { navigate } from '@redwoodjs/router'
+import { Link as RedwoodLink } from '@redwoodjs/router'
 
 interface Props {
   username: string
@@ -57,15 +56,33 @@ const FlashcardSelectTopic: React.FunctionComponent<Props> = ({
           <ModalHeader color="blue.600">Create or Select a Topic</ModalHeader>
           <ModalCloseButton color="blue.600" />
           <ModalBody>
-            <Link color="blue.600" href={`/new-topic/${username}`}>
+            <Text color="blue.600">
+              <a onClick={onClose} href={`/new-topic/${username}`}>
+                Create New Topic
+              </a>
+            </Text>
+            {/* <ChakraLink color="blue.600" href={`/new-topic/${username}`}>
               Create New Topic
-            </Link>
+            </ChakraLink> */}
             <Box p={1} />
             <Divider />
             <Box p={1} />
             {topics?.map((topic, index) => (
               <Text color="blue.600" key={topic + index}>
-                <Link href={`/flashcard/${username}/${topic}`}>{topic}</Link>
+                <a
+                  onClick={onClose}
+                  href={`/flashcard/${username}/${encodeURIComponent(topic)}`}
+                >
+                  {topic}
+                </a>
+
+                {/* <ChakraLink
+                  onClick={onClose}
+                  as={RedwoodLink}
+                  to={`/flashcard/${username}/${encodeURIComponent(topic)}`}
+                >
+                  {topic}
+                </ChakraLink> */}
               </Text>
             ))}
           </ModalBody>

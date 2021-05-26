@@ -34,7 +34,7 @@ const FlipAgainLayout = ({ children }) => {
               paddingLeft={3}
               paddingBottom={1}
             >
-              <Link href="/">FlipAgain</Link>
+              <Link href="/">FlipAgain</Link> (Early Access Testing!)
             </Text>
             {/* <IconButton
               size="lg"
