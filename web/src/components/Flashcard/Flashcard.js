@@ -116,7 +116,7 @@ const Flashcard = ({
             username={flashcard.username}
             topic={flashcard.topic}
           />
-          <Tooltip label="Delete" background="blue.500">
+          <Tooltip label="Remove" background="blue.500">
             <IconButton
               isDisabled={flashcardListLength === ZERO_FLASHCARD_LIST_LENGTH}
               aria-label="Delete flashcard"

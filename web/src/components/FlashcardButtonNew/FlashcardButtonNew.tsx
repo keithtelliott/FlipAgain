@@ -16,7 +16,7 @@ const FlashcardButtonNew = ({
   topic,
 }: FlashcardButtonNewProps) => {
   return (
-    <Tooltip label="New" background="blue.500">
+    <Tooltip label="Add" background="blue.500">
       <ChakraLink
         as={RedwoodLink}
         // to={routes.newFlashcard({
