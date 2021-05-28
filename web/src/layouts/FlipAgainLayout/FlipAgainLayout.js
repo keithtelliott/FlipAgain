@@ -1,6 +1,7 @@
 import { IconButton } from '@chakra-ui/button'
 import { useDisclosure } from '@chakra-ui/hooks'
 import { HamburgerIcon } from '@chakra-ui/icons'
+import { Image } from '@chakra-ui/image'
 import {
   Box,
   HStack,
@@ -26,16 +27,18 @@ const FlipAgainLayout = ({ children }) => {
     <>
       <Box height="100vh">
         <Box as="nav">
-          <HStack justifyContent="space-between">
+          <HStack spacing={1}>
             <Text
               color="blue.600"
               fontWeight="semibold"
               fontSize="large"
               paddingLeft={3}
               paddingBottom={1}
+              paddingRight={0}
             >
-              <Link href="/">FlipAgain</Link> (Early Access Testing!)
+              <Link href="/">FlipAgain</Link>
             </Text>
+            <Image src="/FlipAgain.png" alt="FlipAgain" boxSize="1.5em" />
             {/* <IconButton
               size="lg"
               variant="outline"
