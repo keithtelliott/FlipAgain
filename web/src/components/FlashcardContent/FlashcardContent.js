@@ -2,7 +2,14 @@ import { Center, Text } from '@chakra-ui/layout'
 import { Collapse, Fade, SlideFade } from '@chakra-ui/transition'
 
 const FlashcardContent = ({ front, back, isShowingFront, ...rest }) => (
-  <Center overflow="auto" height="100%" {...rest}>
+  <Center
+    overflow="auto"
+    // overflowX="auto"
+    height="100%"
+    maxWidth="100%"
+    // overflowWrap="anywhere"
+    {...rest}
+  >
     <Text
       as="h3"
       padding={2}
