@@ -11,7 +11,6 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { Tooltip } from '@chakra-ui/tooltip'
-import { Link as RedwoodLink } from '@redwoodjs/router'
 
 interface Props {
   username: string
@@ -57,32 +56,20 @@ const FlashcardSelectTopic: React.FunctionComponent<Props> = ({
           <ModalCloseButton color="blue.600" />
           <ModalBody>
             <Text color="blue.600">
-              <a onClick={onClose} href={`/new-topic/${username}`}>
+              <ChakraLink color="blue.600" href={`/new-topic/${username}`}>
                 Create New Topic
-              </a>
+              </ChakraLink>
             </Text>
-            {/* <ChakraLink color="blue.600" href={`/new-topic/${username}`}>
-              Create New Topic
-            </ChakraLink> */}
             <Box p={1} />
             <Divider />
             <Box p={1} />
             {topics?.map((topic, index) => (
               <Text color="blue.600" key={topic + index}>
-                <a
-                  onClick={onClose}
+                <ChakraLink
                   href={`/flashcard/${username}/${encodeURIComponent(topic)}`}
                 >
                   {topic}
-                </a>
-
-                {/* <ChakraLink
-                  onClick={onClose}
-                  as={RedwoodLink}
-                  to={`/flashcard/${username}/${encodeURIComponent(topic)}`}
-                >
-                  {topic}
-                </ChakraLink> */}
+                </ChakraLink>
               </Text>
             ))}
           </ModalBody>
