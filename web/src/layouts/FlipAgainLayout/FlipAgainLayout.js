@@ -70,10 +70,13 @@ const FlipAgainLayout = ({ children }) => {
             </DrawerOverlay>
           </Drawer>
         </Box>
-        <VStack height={{ base: '91%', sm: '85%', lg: '90%' }} marginX={4}>
-          <VStack as="main" width="100%" height="100%">
-            {children}
-          </VStack>
+        <VStack
+          height={{ base: '91%', sm: '85%', lg: '90%' }}
+          marginX={4}
+          as="main"
+          overflowWrap="anywhere"
+        >
+          {children}
         </VStack>
       </Box>
     </>

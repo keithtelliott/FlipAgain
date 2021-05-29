@@ -1,3 +1,13 @@
+// Go-Do, KTE, 5/28/2021:  If I save a flashcard from the back, but the front
+// violates the max-length validation rule, I need the error message to appear.
+// At the moment, however, the error only appears if the front of the card is shown.
+//
+// Go-Do, KTE, 5/28/2021:  Increase the max number of characters.  Twitter uses a
+// 280 char max.  So use that...
+//
+// Go-Do, KTE, 5/28/2021:  Increase the number characters in the topic.  Truncate the
+// topic name on the flashcard as needed.
+// Go-Do, KTE, 5/28/2021:  Show the number of characters in use.
 import { Button, ButtonGroup } from '@chakra-ui/button'
 import {
   FormControl,
@@ -11,7 +21,7 @@ import { useForm } from 'react-hook-form'
 import FlashcardBox from '../FlashcardBox/FlashcardBox'
 
 const MAX_TOPIC_CHARACTER_LENGTH = 30
-const MAX_FLASHCARD_CHARACTER_LENGTH = 100
+const MAX_FLASHCARD_CHARACTER_LENGTH = 280
 const ERROR_MESSAGE =
   'Max character length exceeded.  Please limit to ' +
   MAX_FLASHCARD_CHARACTER_LENGTH +

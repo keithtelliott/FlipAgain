@@ -71,7 +71,6 @@ const Flashcard = ({
   return (
     <FlashcardBox>
       <FlashcardContent
-        margin="auto"
         front={flashcard.front}
         back={flashcard.back}
         isShowingFront={isShowingFront}
