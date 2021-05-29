@@ -3,11 +3,15 @@
 // At the moment, however, the error only appears if the front of the card is shown.
 //
 // Go-Do, KTE, 5/28/2021:  Increase the max number of characters.  Twitter uses a
-// 280 char max.  So use that...
+// 280 char max.  I could use that...
 //
 // Go-Do, KTE, 5/28/2021:  Increase the number characters in the topic.  Truncate the
 // topic name on the flashcard as needed.
+//
 // Go-Do, KTE, 5/28/2021:  Show the number of characters in use.
+//
+// Go-Do, KTE, 5/28/2021:  Try overflowY="auto", instead of "scroll".  Auto should
+// add the scroll automagically if needed.
 import { Button, ButtonGroup } from '@chakra-ui/button'
 import {
   FormControl,
@@ -19,6 +23,7 @@ import { Center, Input, Select, Stack, Textarea } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import FlashcardBox from '../FlashcardBox/FlashcardBox'
+import LocalPersistenceWarning from '../LocalPersistenceWarning/LocalPersistenceWarning'
 
 const MAX_TOPIC_CHARACTER_LENGTH = 30
 const MAX_FLASHCARD_CHARACTER_LENGTH = 280
@@ -35,6 +40,7 @@ interface Props {
   front?: string
   back?: string
   onSave: (topic: string, front: string, back: string) => void
+  isPersistent?: boolean
 }
 
 const FlashcardForm: React.FunctionComponent<Props> = ({
@@ -44,6 +50,7 @@ const FlashcardForm: React.FunctionComponent<Props> = ({
   front,
   back,
   onSave,
+  isPersistent = true,
 }) => {
   const { handleSubmit, errors, register, formState } = useForm()
   const [isShowingFront, setIsShowingFront] = useState<boolean>(true)
@@ -169,6 +176,7 @@ const FlashcardForm: React.FunctionComponent<Props> = ({
               Flip to Edit {isShowingFront ? 'Back' : 'Front'}
             </Button>
             <Button type="submit">Save</Button>
+            <LocalPersistenceWarning isPersistent={isPersistent} />
           </ButtonGroup>
         </Center>
       </form>

@@ -40,6 +40,8 @@ const NewFlashcard: React.FunctionComponent<NewFlashcardProps> = ({
     isPersistent,
   ] = useLocalFlashcards()
 
+  console.log('NewFlashcard, here is isPersistent:  ', isPersistent)
+
   const decodedUsername = decodeURIComponent(username)
   const decodedUrlTopic: string | undefined =
     topic === undefined || topic === '' ? undefined : decodeURIComponent(topic)
@@ -128,6 +130,7 @@ const NewFlashcard: React.FunctionComponent<NewFlashcardProps> = ({
       topics={topics}
       onSave={onSave}
       isRequestingNewTopic={isRequestingNewTopic}
+      isPersistent={isPersistent}
     />
   )
 }

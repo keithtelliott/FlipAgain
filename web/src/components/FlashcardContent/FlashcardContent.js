@@ -16,7 +16,7 @@ const FlashcardText = ({ text }) => (
 )
 
 const FlashcardContent = ({ front, back, isShowingFront }) => (
-  <Center overflowY="scroll" height="100%">
+  <Center overflowY="auto" height="100%">
     {isShowingFront ? (
       <FlashcardText text={front} />
     ) : (

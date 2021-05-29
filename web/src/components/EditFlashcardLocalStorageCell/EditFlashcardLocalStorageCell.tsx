@@ -21,6 +21,7 @@ interface SuccessProps {
   flashcard: FlashcardInterface
   topics: string[]
   orderNumber: number
+  isPersistent: boolean
 }
 
 interface FailureProps {
@@ -37,6 +38,7 @@ const Success: React.FunctionComponent<SuccessProps> = ({
   flashcard,
   topics,
   orderNumber,
+  isPersistent,
 }) => {
   const onSave = (topic: string, front: string, back: string): void => {
     const updatedFlashcard = { ...flashcard, topic, front, back }
@@ -67,6 +69,7 @@ const Success: React.FunctionComponent<SuccessProps> = ({
       back={flashcard.back}
       front={flashcard.front}
       onSave={onSave}
+      isPersistent={isPersistent}
     />
   )
 }
@@ -102,6 +105,7 @@ const EditFlashcardLocalStorageCell: React.FC<EditFlashcardLocalStorageCellProps
       flashcard={flashcard}
       topics={topics}
       orderNumber={orderNumber}
+      isPersistent={isPersistent}
     />
   )
 }
