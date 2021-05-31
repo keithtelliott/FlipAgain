@@ -10,6 +10,7 @@ const FlashcardText = ({ text }) => (
     color="blue.600"
     textAlign="center"
     overflowWrap="anywhere"
+    wordBreak="break-word"
   >
     {text}
   </Text>
