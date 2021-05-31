@@ -25,7 +25,7 @@ const FlipAgainLayout = ({ children }) => {
 
   return (
     <>
-      <Box height={{ base: '90vh', lg: '100vh' }}>
+      <Box height={{ base: '87vh', lg: '100vh' }}>
         <Box as="nav">
           <HStack spacing={1}>
             <Text
