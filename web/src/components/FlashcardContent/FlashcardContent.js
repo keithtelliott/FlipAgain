@@ -11,6 +11,7 @@ const FlashcardText = ({ text }) => (
     textAlign="center"
     overflowWrap="anywhere"
     wordBreak="break-word"
+    whiteSpace="break-spaces"
   >
     {text}
   </Text>
