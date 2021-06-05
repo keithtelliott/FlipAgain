@@ -1,7 +1,7 @@
 import { Center, Text } from '@chakra-ui/layout'
-import { Collapse, Fade, SlideFade } from '@chakra-ui/transition'
+import { motion } from 'framer-motion'
 
-const FlashcardText = ({ text }) => (
+const FlashcardText = ({ text, isAnimated }) => (
   <Text
     marginY="auto"
     as="h3"
@@ -13,30 +13,24 @@ const FlashcardText = ({ text }) => (
     wordBreak="break-word"
     whiteSpace="break-spaces"
   >
-    {text}
+    {isAnimated ? (
+      <motion.div initial={{ y: 200 }} animate={{ y: 0 }}>
+        {text}
+      </motion.div>
+    ) : (
+      text
+    )}
   </Text>
 )
 
 const FlashcardContent = ({ front, back, isShowingFront }) => (
   <Center overflowY="auto" height="100%">
     {isShowingFront ? (
-      <FlashcardText text={front} />
+      <FlashcardText text={front} isAnimated={!isShowingFront} />
     ) : (
-      <SlideFade in={!isShowingFront} offsetY="200px">
-        <FlashcardText text={back} />
-      </SlideFade>
+      <FlashcardText text={back} isAnimated={!isShowingFront} />
     )}
   </Center>
 )
-
-{
-  /* <SlideFade in={!isShowingFront}>{back}</SlideFade> */
-}
-
-{
-  /* <SlideFade in={!isShowingFront} offsetY="50px">
-          {back}
-        </SlideFade> */
-}
 
 export default FlashcardContent

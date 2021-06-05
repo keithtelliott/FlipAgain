@@ -12,6 +12,11 @@
 //
 // Go-Do, KTE, 5/28/2021:  Try overflowY="auto", instead of "scroll".  Auto should
 // add the scroll automagically if needed.
+//
+// Go-Do, KTE, 6/2/2021:  Show the number of characters in use on form input
+// Go-Do, KTE, 6/2/2021:  Provide ability to order flashcards - as I would when creating
+// a talk or writing a paper
+//
 import { Button, ButtonGroup } from '@chakra-ui/button'
 import {
   FormControl,
@@ -60,10 +65,8 @@ const FlashcardForm: React.FunctionComponent<Props> = ({
 
   const onSubmit = (data) => {
     console.log('fcf, data:  ', data)
-    // data?.newTopic ?
 
     onSave(data?.newTopic || data.topic, data.front, data.back)
-    // onSave(data.topic, data.front, data.back)
   }
 
   // Q: How do I vertical align (center) in a text box?
@@ -101,7 +104,6 @@ const FlashcardForm: React.FunctionComponent<Props> = ({
             </Select>
           </FormControl>
 
-          {/* {(topic === CREATE_NEW_TOPIC || */}
           {selectedTopic === CREATE_NEW_TOPIC && (
             <FormControl
               isInvalid={errors.topic}
