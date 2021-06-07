@@ -74,6 +74,7 @@ const Flashcard = ({
         front={flashcard.front}
         back={flashcard.back}
         isShowingFront={isShowingFront}
+        setIsShowingFront={setIsShowingFront}
       />
       <Stack
         direction={['column', 'row']}

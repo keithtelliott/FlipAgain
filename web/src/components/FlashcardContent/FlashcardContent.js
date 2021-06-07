@@ -23,8 +23,17 @@ const FlashcardText = ({ text, isAnimated }) => (
   </Text>
 )
 
-const FlashcardContent = ({ front, back, isShowingFront }) => (
-  <Center overflowY="auto" height="100%">
+const FlashcardContent = ({
+  front,
+  back,
+  isShowingFront,
+  setIsShowingFront,
+}) => (
+  <Center
+    overflowY="auto"
+    height="100%"
+    onClick={() => setIsShowingFront(!isShowingFront)}
+  >
     {isShowingFront ? (
       <FlashcardText text={front} isAnimated={!isShowingFront} />
     ) : (
