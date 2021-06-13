@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/icons'
 import { Box, Stack } from '@chakra-ui/layout'
 import { Tooltip } from '@chakra-ui/tooltip'
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useEffect, useState } from 'react'
 import FlashcardBox from '../FlashcardBox/FlashcardBox'
 import FlashcardButtonEdit from '../FlashcardButtonEdit/FlashcardButtonEdit'
@@ -68,6 +68,32 @@ const Flashcard = ({
     }
   }
 
+  /**
+   * Navigate to the previous flashcard if one exists.  Otherwise do nothing.
+   */
+  const onSwipeToPrev = (orderNumber, username, topic) => {
+    console.log('running onSwipeToPrev')
+    orderNumber > 1 &&
+      navigate(
+        `/flashcard/${encodeURIComponent(username)}/${encodeURIComponent(
+          topic
+        )}/${orderNumber - 1}`
+      )
+  }
+
+  /**
+   * Navigate to the next flashcard if one exists.  Otherwise do nothing.
+   */
+  const onSwipeToNext = (orderNumber, flashcardListLength, username, topic) => {
+    console.log('running onSwipeToNext')
+    orderNumber < flashcardListLength &&
+      navigate(
+        `/flashcard/${encodeURIComponent(username)}/${encodeURIComponent(
+          topic
+        )}/${orderNumber + 1}`
+      )
+  }
+
   return (
     <FlashcardBox>
       <FlashcardContent
@@ -75,6 +101,17 @@ const Flashcard = ({
         back={flashcard.back}
         isShowingFront={isShowingFront}
         setIsShowingFront={setIsShowingFront}
+        onSwipeToPrev={() =>
+          onSwipeToPrev(orderNumber, flashcard.username, flashcard.topic)
+        }
+        onSwipeToNext={() =>
+          onSwipeToNext(
+            orderNumber,
+            flashcardListLength,
+            flashcard.username,
+            flashcard.topic
+          )
+        }
       />
       <Stack
         direction={['column', 'row']}
