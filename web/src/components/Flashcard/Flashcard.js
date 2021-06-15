@@ -43,7 +43,9 @@ const Flashcard = ({
   const [isShowingFront, setIsShowingFront] = useState(true)
 
   useEffect(() => {
+    console.log('running fc useEffect')
     setIsShowingFront(true)
+    // }, [])
   }, [orderNumber])
 
   const onDeleteClick = (id) => {
@@ -73,6 +75,8 @@ const Flashcard = ({
    */
   const onSwipeToPrev = (orderNumber, username, topic) => {
     console.log('running onSwipeToPrev')
+    // const newOrderNumber = orderNumber <= 1 ? 1 : orderNumber - 1
+
     orderNumber > 1 &&
       navigate(
         `/flashcard/${encodeURIComponent(username)}/${encodeURIComponent(
