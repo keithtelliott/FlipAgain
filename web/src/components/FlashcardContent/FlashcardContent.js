@@ -2,10 +2,7 @@ import { Center, Text } from '@chakra-ui/layout'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 
-const MIN_SWIPE_TO_PROCEED_PIXELS = 30
-// const SWIPE_NO = 'SWIPE_NO'
-// const SWIPE_TO_NEXT = 'SWIPE_TO_NEXT'
-// const SWIPE_TO_PREV = 'SWIPE_TO_PREV'
+const MAX_TAP_MOVEMENT_PIXELS = 3
 
 const flipVariant = {
   hidden: { y: 200 },
@@ -43,6 +40,8 @@ const FlashcardContent = ({
   onSwipeToNext,
 }) => {
   const [initialDragX, setInitialDragX] = useState()
+  // const [initialTapX, setInitialTapX] = useState()
+  let initialTapX
 
   const variants = {
     visible: { x: 0, opacity: 1, scale: 5 },
@@ -71,14 +70,30 @@ const FlashcardContent = ({
   // go-do:  pull the next in as you are swiping the existing out like in iphoto
   const onDragEnd = (event, info) => {
     const swipeLenghtPixels = info.point.x - initialDragX
-    // event.preventDefault()
-    // event.stopImmediatePropagation()
-    // event.stopPropagation()
     if (swipeLenghtPixels < 0) {
       onSwipeToNext()
     } else {
       onSwipeToPrev()
     }
+  }
+
+  const onTapStart = (event, info) => {
+    console.log('onTapStart, here is the info.point.x:  ', info.point.x)
+    initialTapX = info.point.x
+  }
+
+  const onTap = (event, info) => {
+    console.log(
+      'running onTap.  Here is the event and info.point.x...',
+      info.point.x
+    )
+    console.log('running onTap.  Here is the initialTapX...', initialTapX)
+    if (Math.abs(info.point.x - initialTapX) < MAX_TAP_MOVEMENT_PIXELS) {
+      console.log('in if in onTap.  setting is showing front...')
+      setIsShowingFront(!isShowingFront)
+    }
+    console.log(event)
+    console.log(info)
   }
 
   return (
@@ -105,12 +120,8 @@ const FlashcardContent = ({
         display: 'flex',
         alignContent: 'space-around',
       }}
-      onTap={(event, info) => {
-        console.log('running onTap.  Here is the event and info...')
-        console.log(event)
-        console.log(info)
-        setIsShowingFront(!isShowingFront)
-      }}
+      onTapStart={onTapStart}
+      onTap={onTap}
     >
       {isShowingFront ? (
         <FlashcardText text={front} isAnimatedFlip={!isShowingFront} />
