@@ -105,31 +105,18 @@ const FlashcardContent = ({
         display: 'flex',
         alignContent: 'space-around',
       }}
+      onTap={(event, info) => {
+        console.log('running onTap.  Here is the event and info...')
+        console.log(event)
+        console.log(info)
+        setIsShowingFront(!isShowingFront)
+      }}
     >
-      <motion.div
-        onTap={(event, info) => {
-          console.log('running onTap.  Here is the event and info...')
-          console.log(event)
-          console.log(info)
-          setIsShowingFront(!isShowingFront)
-          // event.cancelBubble(true)
-        }}
-        style={{
-          backgroundColor: 'white',
-          width: '100%',
-          height: '100%',
-          overflowY: 'auto',
-          margin: 'auto',
-          display: 'flex',
-          alignContent: 'space-around',
-        }}
-      >
-        {isShowingFront ? (
-          <FlashcardText text={front} isAnimatedFlip={!isShowingFront} />
-        ) : (
-          <FlashcardText text={back} isAnimatedFlip={!isShowingFront} />
-        )}
-      </motion.div>
+      {isShowingFront ? (
+        <FlashcardText text={front} isAnimatedFlip={!isShowingFront} />
+      ) : (
+        <FlashcardText text={back} isAnimatedFlip={!isShowingFront} />
+      )}
     </motion.div>
     // </Center>
   )
