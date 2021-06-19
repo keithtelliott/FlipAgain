@@ -9,8 +9,9 @@ import {
 } from '@chakra-ui/icons'
 import { Box, Stack } from '@chakra-ui/layout'
 import { Tooltip } from '@chakra-ui/tooltip'
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { Link, navigate, Route, routes } from '@redwoodjs/router'
 import { useEffect, useState } from 'react'
+import FlashcardInterface from 'src/util/FlashcardInterface'
 import FlashcardBox from '../FlashcardBox/FlashcardBox'
 import FlashcardButtonEdit from '../FlashcardButtonEdit/FlashcardButtonEdit'
 import FlashcardButtonFlip from '../FlashcardButtonFlip/FlashcardButtonFlip'
@@ -25,6 +26,14 @@ const ZERO_FLASHCARD_LIST_LENGTH = 0 // If the stack of flashcards is empty, som
 
 const MAX_DELETE_CONFIRMATION_STRING_LENGTH = 25
 
+interface Props {
+  onDelete: any
+  flashcard: FlashcardInterface
+  orderNumber: number
+  flashcardListLength: number
+  topics: string[]
+}
+
 const truncate = (maxStringLength, text) => {
   let output = text
   if (text && text.length > maxStringLength) {
@@ -33,7 +42,7 @@ const truncate = (maxStringLength, text) => {
   return output
 }
 
-const Flashcard = ({
+const Flashcard: React.FunctionComponent<Props> = ({
   onDelete,
   flashcard,
   orderNumber,
@@ -48,7 +57,7 @@ const Flashcard = ({
     // }, [])
   }, [orderNumber])
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: string) => {
     if (
       confirm(
         `Are you sure you want to delete this flashcard?
@@ -70,14 +79,23 @@ const Flashcard = ({
     }
   }
 
+  // function onSwipeToPrev(
+  //   orderNumber: number,
+  //   username: string,
+  //   topic: string
+  // ): void
   /**
    * Navigate to the previous flashcard if one exists.  Otherwise do nothing.
    */
-  const onSwipeToPrev = (orderNumber, username, topic) => {
-    console.log('running onSwipeToPrev')
-    // const newOrderNumber = orderNumber <= 1 ? 1 : orderNumber - 1
-
+  function onSwipeToPrev(orderNumber: number, username: string, topic: string) {
     orderNumber > 1 &&
+      // navigate(
+      //   routes.flashcard({
+      //     username: encodeURIComponent(username),
+      //     topic: encodeURIComponent(topic),
+      //     orderNumber: orderNumber - 1,
+      //   })
+      // )
       navigate(
         `/flashcard/${encodeURIComponent(username)}/${encodeURIComponent(
           topic
@@ -88,7 +106,12 @@ const Flashcard = ({
   /**
    * Navigate to the next flashcard if one exists.  Otherwise do nothing.
    */
-  const onSwipeToNext = (orderNumber, flashcardListLength, username, topic) => {
+  const onSwipeToNext = (
+    orderNumber: number,
+    flashcardListLength: number,
+    username: string,
+    topic: string
+  ): void => {
     console.log('running onSwipeToNext')
     orderNumber < flashcardListLength &&
       navigate(

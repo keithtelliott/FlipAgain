@@ -1,37 +1,20 @@
-import { Center, Text } from '@chakra-ui/layout'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { SetStateAction } from 'react'
 import { useState } from 'react'
+import FlashcardText from '../FlashcardText/FlashcardText'
 
 const MAX_TAP_MOVEMENT_PIXELS = 3
 
-const flipVariant = {
-  hidden: { y: 200 },
-  visible: { y: 0 },
+interface Props {
+  front: string
+  back: string
+  isShowingFront: boolean
+  setIsShowingFront: React.Dispatch<SetStateAction<boolean>>
+  onSwipeToPrev: any
+  onSwipeToNext: any
 }
 
-const FlashcardText = ({ text, isAnimatedFlip }) => (
-  <Text
-    margin="auto"
-    as="h3"
-    padding={2}
-    fontSize={{ base: '5xl', lg: '6xl' }}
-    color="blue.600"
-    textAlign="center"
-    overflowWrap="anywhere"
-    wordBreak="break-word"
-    whiteSpace="break-spaces"
-  >
-    {isAnimatedFlip ? (
-      <motion.div variants={flipVariant} initial="hidden" animate="visible">
-        {text}
-      </motion.div>
-    ) : (
-      text
-    )}
-  </Text>
-)
-
-const FlashcardContent = ({
+const FlashcardContent: React.FunctionComponent<Props> = ({
   front,
   back,
   isShowingFront,
@@ -39,9 +22,9 @@ const FlashcardContent = ({
   onSwipeToPrev,
   onSwipeToNext,
 }) => {
-  const [initialDragX, setInitialDragX] = useState()
+  const [initialDragX, setInitialDragX] = useState<number>()
   // const [initialTapX, setInitialTapX] = useState()
-  let initialTapX
+  let initialTapX: number
 
   const variants = {
     visible: { x: 0, opacity: 1, scale: 5 },
@@ -107,7 +90,7 @@ const FlashcardContent = ({
       drag="x"
       dragMomentum={false}
       dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.5}
+      dragElastic={0.03}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       // transition={{ when: 'beforeChildren' }}
