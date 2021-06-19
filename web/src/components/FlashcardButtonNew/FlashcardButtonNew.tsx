@@ -5,7 +5,7 @@ import { Tooltip } from '@chakra-ui/tooltip'
 import { Link as RedwoodLink, routes } from '@redwoodjs/router'
 
 interface FlashcardButtonNewProps {
-  orderNumber: string
+  orderNumber: number
   username: string
   topic: string
 }

@@ -9,6 +9,7 @@ const FlashcardBox = ({ children, ...props }) => (
     padding={1}
     shadow="2xl"
     borderWidth="1px"
+    overflowX="hidden"
     {...props}
   >
     {children}
