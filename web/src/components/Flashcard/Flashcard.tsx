@@ -52,7 +52,6 @@ const Flashcard: React.FunctionComponent<Props> = ({
   const [isShowingFront, setIsShowingFront] = useState(true)
 
   useEffect(() => {
-    console.log('running fc useEffect')
     setIsShowingFront(true)
     // }, [])
   }, [orderNumber])
@@ -112,7 +111,6 @@ const Flashcard: React.FunctionComponent<Props> = ({
     username: string,
     topic: string
   ): void => {
-    console.log('running onSwipeToNext')
     orderNumber < flashcardListLength &&
       navigate(
         `/flashcard/${encodeURIComponent(username)}/${encodeURIComponent(
