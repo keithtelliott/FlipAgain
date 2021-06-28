@@ -66,40 +66,58 @@ const FlashcardContent: React.FunctionComponent<Props> = ({
     },
   }
   const onDragStart = (event, info) => {
+    console.log('onDragStart, info:  ', info)
+
     setInitialDragX(info.point.x)
     setInitialDragY(info.point.y)
   }
 
   // go-do:  pull the next in as you are swiping the existing out like in iphoto
   const onDragEnd = (event, info) => {
+    console.log('onDragEnd.  Here is info:  ', info)
+    console.log(
+      'onDragEnd, swipePowerX:  ',
+      swipePower(info.offset.x, info.velocity.x)
+    )
+    console.log(
+      'onDragEnd, swipePowerY:  ',
+      swipePower(info.offset.y, info.velocity.y)
+    )
+
     if (
-      Math.abs(swipePower(info.offset.x, info.velocity.x)) <
+      Math.abs(swipePower(info.offset.x, info.velocity.x)) >
       SWIPE_CONFIDENCE_THRESHOLD
     ) {
-      return
-    }
+      console.log('onDragEnd, swiping left or right')
 
-    const swipeLenghtPixels = info.point.x - initialDragX
-    if (swipeLenghtPixels < 0) {
-      onSwipeToNext()
-    } else {
-      onSwipeToPrev()
-    }
-  }
-
-  const onTapStart = (event, info) => {
-    initialTapX = info.point.x
-    initialTapY = info.point.y
-  }
-
-  const onTap = (event, info) => {
-    if (
-      Math.abs(info.point.x - initialTapX) < MAX_TAP_MOVEMENT_PIXELS &&
-      Math.abs(info.point.y - initialTapY) < MAX_TAP_MOVEMENT_PIXELS
+      const swipeLengthPixelsX = info.point.x - initialDragX
+      swipeLengthPixelsX < 0 ? onSwipeToNext() : onSwipeToPrev() // Swiping right or left
+    } else if (
+      swipePower(info.offset.y, info.velocity.y) < -500 // > SWIPE_CONFIDENCE_THRESHOLD
     ) {
-      setIsShowingFront(!isShowingFront)
+      const swipeLengthPixelsY = info.point.y - initialDragY
+      console.log(
+        'onDragEnd, else if, swipeLengthPixelsY:  ',
+        swipeLengthPixelsY
+      )
+
+      if (swipeLengthPixelsY < 0) setIsShowingFront(!isShowingFront) // Swiping up
     }
   }
+
+  // const onTapStart = (event, info) => {
+  //   initialTapX = info.point.x
+  //   initialTapY = info.point.y
+  // }
+
+  // const onTap = (event, info) => {
+  //   if (
+  //     Math.abs(info.point.x - initialTapX) < MAX_TAP_MOVEMENT_PIXELS &&
+  //     Math.abs(info.point.y - initialTapY) < MAX_TAP_MOVEMENT_PIXELS
+  //   ) {
+  //     setIsShowingFront(!isShowingFront)
+  //   }
+  // }
 
   return (
     // <Center
@@ -125,8 +143,8 @@ const FlashcardContent: React.FunctionComponent<Props> = ({
         display: 'flex',
         alignContent: 'space-around',
       }}
-      onTapStart={onTapStart}
-      onTap={onTap}
+      // onTapStart={onTapStart}
+      // onTap={onTap}
     >
       {isShowingFront ? (
         <FlashcardText text={front} isAnimatedFlip={!isShowingFront} />
