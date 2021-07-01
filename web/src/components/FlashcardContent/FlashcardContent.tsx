@@ -95,18 +95,19 @@ const FlashcardContent: React.FunctionComponent<Props> = ({
 
       const swipeLengthPixelsX = info.point.x - initialDragX
       swipeLengthPixelsX < 0 ? onSwipeToNext() : onSwipeToPrev() // Swiping right or left
-    } else if (
-      swipePower(info.offset.y, info.velocity.y) <
-      -1 * SWIPE_CONFIDENCE_THRESHOLD
-    ) {
-      const swipeLengthPixelsY = info.point.y - initialDragY
-      console.log(
-        'onDragEnd, else if, swipeLengthPixelsY:  ',
-        swipeLengthPixelsY
-      )
-
-      if (swipeLengthPixelsY < 0) setIsShowingFront(!isShowingFront) // Swiping up
     }
+    // else if (
+    //   swipePower(info.offset.y, info.velocity.y) <
+    //   -1 * SWIPE_CONFIDENCE_THRESHOLD
+    // ) {
+    //   const swipeLengthPixelsY = info.point.y - initialDragY
+    //   console.log(
+    //     'onDragEnd, else if, swipeLengthPixelsY:  ',
+    //     swipeLengthPixelsY
+    //   )
+
+    //   if (swipeLengthPixelsY < 0) setIsShowingFront(!isShowingFront) // Swiping up
+    // }
   }
 
   // const onTapStart = (event, info) => {
