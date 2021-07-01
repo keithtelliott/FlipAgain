@@ -66,33 +66,16 @@ const FlashcardContent: React.FunctionComponent<Props> = ({
     },
   }
   const onDragStart = (event, info) => {
-    console.log('onDragStart, info:  ', info)
-
     setInitialDragX(info.point.x)
     setInitialDragY(info.point.y)
   }
 
   // go-do:  pull the next in as you are swiping the existing out like in iphoto
   const onDragEnd = (event, info) => {
-    console.log('onDrag.  window object:  ', window)
-
-    console.log('onDragEnd.  Here is info:  ', info)
-    console.log('onDragEnd.  Here is event:  ', event)
-    console.log(
-      'onDragEnd, swipePowerX:  ',
-      swipePower(info.offset.x, info.velocity.x)
-    )
-    console.log(
-      'onDragEnd, swipePowerY:  ',
-      swipePower(info.offset.y, info.velocity.y)
-    )
-
     if (
       Math.abs(swipePower(info.offset.x, info.velocity.x)) >
       SWIPE_CONFIDENCE_THRESHOLD
     ) {
-      console.log('onDragEnd, swiping left or right')
-
       const swipeLengthPixelsX = info.point.x - initialDragX
       swipeLengthPixelsX < 0 ? onSwipeToNext() : onSwipeToPrev() // Swiping right or left
     }
