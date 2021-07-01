@@ -23,8 +23,28 @@ const FlashcardContent: React.FunctionComponent<Props> = ({
   onSwipeToNext,
 }) => {
   const [initialDragX, setInitialDragX] = useState<number>()
+  const [initialDragY, setInitialDragY] = useState<number>()
   // const [initialTapX, setInitialTapX] = useState()
   let initialTapX: number
+  let initialTapY: number
+
+  /**
+   *************************************************************************************
+   * Note by KTE:  The following comment and swipePower function are from a Framer Motion
+   * codesandbox.io example located @ https://codesandbox.io/s/framer-motion-image-gallery-pqvx3?fontsize=14&module=/src/Example.tsx&file=/src/Example.tsx:522-977
+   *************************************************************************************
+   *
+   * Experimenting with distilling swipe offset and velocity into a single variable, so the
+   * less distance a user has swiped, the more velocity they need to register as a swipe.
+   * Should accomodate longer swipes and short flicks without having binary checks on
+   * just distance thresholds and velocity > 0.
+   *
+   * Source:  Framer motion codesandbox.io example @
+   */
+  const SWIPE_CONFIDENCE_THRESHOLD = 10000
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity
+  }
 
   const variants = {
     visible: { x: 0, opacity: 1, scale: 5 },
@@ -46,38 +66,46 @@ const FlashcardContent: React.FunctionComponent<Props> = ({
     },
   }
   const onDragStart = (event, info) => {
-    console.log('onDragStart:  x and y:  ', info.point.x, info.point.y)
     setInitialDragX(info.point.x)
+    setInitialDragY(info.point.y)
   }
 
   // go-do:  pull the next in as you are swiping the existing out like in iphoto
   const onDragEnd = (event, info) => {
-    const swipeLenghtPixels = info.point.x - initialDragX
-    if (swipeLenghtPixels < 0) {
-      onSwipeToNext()
-    } else {
-      onSwipeToPrev()
+    if (
+      Math.abs(swipePower(info.offset.x, info.velocity.x)) >
+      SWIPE_CONFIDENCE_THRESHOLD
+    ) {
+      const swipeLengthPixelsX = info.point.x - initialDragX
+      swipeLengthPixelsX < 0 ? onSwipeToNext() : onSwipeToPrev() // Swiping right or left
     }
+    // else if (
+    //   swipePower(info.offset.y, info.velocity.y) <
+    //   -1 * SWIPE_CONFIDENCE_THRESHOLD
+    // ) {
+    //   const swipeLengthPixelsY = info.point.y - initialDragY
+    //   console.log(
+    //     'onDragEnd, else if, swipeLengthPixelsY:  ',
+    //     swipeLengthPixelsY
+    //   )
+
+    //   if (swipeLengthPixelsY < 0) setIsShowingFront(!isShowingFront) // Swiping up
+    // }
   }
 
-  const onTapStart = (event, info) => {
-    console.log('onTapStart, here is the info.point.x:  ', info.point.x)
-    initialTapX = info.point.x
-  }
+  // const onTapStart = (event, info) => {
+  //   initialTapX = info.point.x
+  //   initialTapY = info.point.y
+  // }
 
-  const onTap = (event, info) => {
-    console.log(
-      'running onTap.  Here is the event and info.point.x...',
-      info.point.x
-    )
-    console.log('running onTap.  Here is the initialTapX...', initialTapX)
-    if (Math.abs(info.point.x - initialTapX) < MAX_TAP_MOVEMENT_PIXELS) {
-      console.log('in if in onTap.  setting is showing front...')
-      setIsShowingFront(!isShowingFront)
-    }
-    console.log(event)
-    console.log(info)
-  }
+  // const onTap = (event, info) => {
+  //   if (
+  //     Math.abs(info.point.x - initialTapX) < MAX_TAP_MOVEMENT_PIXELS &&
+  //     Math.abs(info.point.y - initialTapY) < MAX_TAP_MOVEMENT_PIXELS
+  //   ) {
+  //     setIsShowingFront(!isShowingFront)
+  //   }
+  // }
 
   return (
     // <Center
@@ -103,8 +131,8 @@ const FlashcardContent: React.FunctionComponent<Props> = ({
         display: 'flex',
         alignContent: 'space-around',
       }}
-      onTapStart={onTapStart}
-      onTap={onTap}
+      // onTapStart={onTapStart}
+      // onTap={onTap}
     >
       {isShowingFront ? (
         <FlashcardText text={front} isAnimatedFlip={!isShowingFront} />
