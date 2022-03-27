@@ -13,11 +13,21 @@
     ]
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
+    "@redwoodjs/auth": "0.49.1",
     "@redwoodjs/forms": "0.49.1",
     "@redwoodjs/router": "0.49.1",
     "@redwoodjs/web": "0.49.1",
+    "@supabase/supabase-js": "^1.31.1",
     "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@chakra-ui/react": "^1.8.6",
+    "@chakra-ui/storybook-addon": "^1.0.3",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^4"
   }
 }
