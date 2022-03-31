@@ -17,12 +17,15 @@ export const schema = gql`
 
   type Query {
     users: [User!]! @skipAuth #@requireAuth
+    # findOrCreateUser(input: CreateUserInput!): User! @skipAuth
     userByUsername(username: String!): User @skipAuth #@requireAuth
     flashcardPageByUsernameAndTopicAndOrder(
       username: String!
       topic: String!
       order: Int!
     ): FlashcardPage @skipAuth #@requireAuth
+    findOrCreateUser(username: String!, email: String!, name: String): User!
+      @skipAuth
     flashcardByUsernameAndTopicAndOrder(
       username: String!
       topic: String!
@@ -37,7 +40,7 @@ export const schema = gql`
 
   input CreateUserInput {
     username: String!
-    email: String!
+    email: String
     name: String
   }
 

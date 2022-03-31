@@ -19,6 +19,42 @@ export const userByUsername = ({ username }: { username: string }) => {
   })
 }
 
+interface CreateUserArgs {
+  input: Prisma.UserCreateInput
+}
+
+// export const findOrCreateUser = ({ input }: CreateUserArgs) => {
+// export const findOrCreateUser = ({
+//   username,
+//   email,
+//   name,
+// }: {
+//   username: string
+//   email?: string
+//   name?: string
+// }) => {
+export const findOrCreateUser = ({
+  username,
+  email,
+  name,
+}: {
+  username: string
+  email?: string
+  name?: string
+}) => {
+  console.log('running findOrCreateUser.  username:  ', username)
+
+  return db.user.upsert({
+    where: { username },
+    update: {},
+    create: {
+      username,
+      email,
+      name,
+    },
+  })
+}
+
 const JUST_ONE_FLASHCARD = 1 // KTE, 3/6/2022: The first one is the one requested by the user, the second is needed to grab its orderNum
 const SKIP_ZERO_WHEN_GRABBING_FIRST_FROM_DESC_LIST = 0
 

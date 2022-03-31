@@ -1,4 +1,5 @@
 import {
+  findOrCreateUser,
   flashcardByUsernameAndTopicAndOrder,
   flashcardPageByUsernameAndTopicAndLast,
   flashcardPageByUsernameAndTopicAndOrder,
@@ -29,6 +30,41 @@ describe('userByUsername', () => {
 
     expect(result.username).toEqual('keith')
   })
+})
+
+describe('findOrCreateUser', () => {
+  scenario(
+    'finds a user by username, and creates one if it does not exist',
+    async (scenario: StandardScenario) => {
+      const result = await findOrCreateUser({
+        username: 'keith',
+        email: 'keith@example.com',
+        name: null,
+      })
+      // const result = await findOrCreateUser('keith', 'keith@example.com', null)
+
+      expect(result.username).toEqual('keith')
+
+      const result2 = await findOrCreateUser({
+        username: 'bo',
+        email: 'bo@bothedog',
+        name: 'Bo the Dog',
+      })
+
+      expect(result2.username).toEqual('bo')
+      expect(result2.name).toBeNull() // bo exists, so no update occurs (it's just find or create)
+
+      const resultNew = await findOrCreateUser({
+        username: 'beach',
+        email: 'beach@beachthecat',
+        name: 'Beach the Cat',
+      })
+      console.log('findOrCreateUser test.  resultNew:  ', resultNew)
+
+      expect(resultNew.username).toEqual('beach')
+      expect(resultNew.name).toEqual('Beach the Cat')
+    }
+  )
 })
 
 describe('flashcardPageByUsernameAndTopicAndOrder', () => {

@@ -14,6 +14,8 @@ const Routes = () => {
   return (
     <Router>
       <Set wrap={FlipAgainLayout}>
+        <Route path="/signin" page={SigninPage} name="signin" />
+        <Route path="/flashcard/{username}" page={FlashcardFlashcardUserPage} name="flashcardUser" />
         <Route path="/flashcard/{username}/{topic}" page={FlashcardFlashcardPage} name="flashcard" />
         <Route path="/flashcard/{username}/{topic}/{order:Int}" page={FlashcardFlashcardPage} name="flashcard" />
         <Route path="/flashcard/{username}/{topic}/{order:Int}/edit" page={FlashcardEditFlashcardPage} name="editFlashcard" />

@@ -8,18 +8,32 @@ import Flashcard from 'src/components/Flashcard/Flashcard'
 
 interface SuccessPassThroughProps {
   username: string
+  name: string
+  email: string
   topic: string
   isRequestingNewTopic?: boolean
 }
 
 export const beforeQuery = (props) => {
+  console.log('NewFlashcardCell, here are the props:  ', props)
+
   return { variables: props, fetchPolicy: 'no-cache' }
 }
 
 export const QUERY = gql`
-  query FindTopicsAndUserByUsername($username: String!) {
+  query FindTopicsAndUserByUsername(
+    $username: String!
+    $email: String!
+    $name: String
+  ) {
     topics: topicsByUsername(username: $username)
-    user: userByUsername(username: $username) {
+    # user: userByUsername(username: $username) {
+    user: findOrCreateUser(
+      # input: { username: $username, name: $name, email: $email }
+      username: $username
+      email: $email
+      name: $name
+    ) {
       id
     }
   }

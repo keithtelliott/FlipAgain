@@ -1,10 +1,12 @@
-import { IconButton } from '@chakra-ui/button'
+import { Button } from '@chakra-ui/button'
 import { useDisclosure } from '@chakra-ui/hooks'
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, MinusIcon } from '@chakra-ui/icons'
 import { Image } from '@chakra-ui/image'
 import {
   Box,
+  Flex,
   HStack,
+  Spacer,
   Link as ChakraLink,
   Link,
   Text,
@@ -18,7 +20,8 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from '@chakra-ui/modal'
-import { Link as RedwoodLink, routes } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
+import { Link as RedwoodLink, navigate, routes } from '@redwoodjs/router'
 
 type FlipAgainLayoutProps = {
   children?: React.ReactNode
@@ -27,19 +30,28 @@ type FlipAgainLayoutProps = {
 const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  const { logIn, client, logOut, isAuthenticated } = useAuth()
+
+  async function signInWithGoogle() {
+    const { user, session, error } = await logIn({
+      provider: 'google',
+    })
+    console.log('signInWithGoogle, here is the user:  ', user)
+    console.log('signInWithGoogle, here is the session:  ', session)
+    console.log('signInWithGoogle, here is the error:  ', error)
+  }
+
+  async function handleLogOut() {
+    await logOut()
+    navigate(routes.home())
+  }
+
   return (
     <>
       <Box height={{ base: '87vh', lg: '100vh' }}>
-        <Box as="nav">
+        <Flex as="nav" paddingX={3} paddingY={1}>
           <HStack spacing={1}>
-            <Text
-              color="blue.600"
-              fontWeight="semibold"
-              fontSize="large"
-              paddingLeft={3}
-              paddingBottom={1}
-              paddingRight={0}
-            >
+            <Text color="blue.600" fontWeight="semibold" fontSize="large">
               <Link href="/">FlipAgain</Link>
             </Text>
             <Image src="/FlipAgain.png" alt="FlipAgain" boxSize="1.5em" />
@@ -51,6 +63,41 @@ const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
               aria-label="More info menu"
               icon={<HamburgerIcon onClick={onOpen} w={5} h={5} />}
             /> */}
+          </HStack>
+          <Spacer />
+          <HStack spacing={1}>
+            {isAuthenticated ? (
+              <Button
+                variant="outline"
+                colorScheme="blue"
+                size="sm"
+                aria-label="Log Out"
+                onClick={handleLogOut}
+              >
+                Log Out
+              </Button>
+            ) : (
+              <>
+                <Button
+                  variant="outline"
+                  colorScheme="blue"
+                  size="sm"
+                  aria-label="Sign in"
+                  onClick={signInWithGoogle}
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  variant="outline"
+                  colorScheme="blue"
+                  size="sm"
+                  aria-label="Sign in"
+                  onClick={signInWithGoogle}
+                >
+                  Sign In
+                </Button>
+              </>
+            )}
           </HStack>
           <Drawer placement="right" isOpen={isOpen} onClose={onClose} size="xs">
             <DrawerOverlay>
@@ -73,7 +120,7 @@ const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
               </DrawerContent>
             </DrawerOverlay>
           </Drawer>
-        </Box>
+        </Flex>
         <VStack
           height={{ base: '91%', sm: '85%', lg: '90%' }}
           marginX={4}
