@@ -9,8 +9,6 @@ import defaultFlashcards from 'src/util/defaultFlashcards'
 const HomePage = () => {
   const { isAuthenticated, currentUser } = useAuth()
 
-  console.log('home page currentUser:  ', currentUser)
-
   if (isAuthenticated)
     navigate(
       routes.flashcardUser({ username: usernameFromUserObject(currentUser) })

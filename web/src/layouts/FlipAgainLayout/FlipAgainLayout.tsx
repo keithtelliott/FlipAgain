@@ -22,6 +22,7 @@ import {
 } from '@chakra-ui/modal'
 import { useAuth } from '@redwoodjs/auth'
 import { Link as RedwoodLink, navigate, routes } from '@redwoodjs/router'
+import { FcGoogle } from 'react-icons/fc'
 
 type FlipAgainLayoutProps = {
   children?: React.ReactNode
@@ -86,6 +87,15 @@ const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
                   variant="outline"
                   colorScheme="blue"
                   size="sm"
+                  onClick={signInWithGoogle}
+                  leftIcon={<FcGoogle />}
+                >
+                  Sign in with Google
+                </Button>
+                {/* <Button
+                  variant="outline"
+                  colorScheme="blue"
+                  size="sm"
                   aria-label="Sign in"
                   onClick={signInWithGoogle}
                 >
@@ -99,7 +109,7 @@ const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
                   onClick={signInWithGoogle}
                 >
                   Sign In
-                </Button>
+                </Button> */}
               </>
             )}
           </HStack>

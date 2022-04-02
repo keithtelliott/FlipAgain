@@ -13,7 +13,7 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <Text color="blue.600">{''}</Text>
+export const Loading = () => <Text color="blue.600">Grabbing Topics...</Text>
 
 export const Empty = () => <div>{'(No topics yet)'}</div>
 
