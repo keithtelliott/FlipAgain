@@ -17,8 +17,7 @@ const Routes = () => {
         <Route path="/" page={HomePage} name="home" />
         <Route notfound page={NotFoundPage} />
         <Route path="/signin" page={SigninPage} name="signin" />
-        <Route path="/flashcard/FlipAgain/Welcome/{order:Int}" page={FlashcardFlashcardWelcomePage} name="flashcardWelcome" />
-
+        <Route path="/flashcard/HelloFlipAgain/Welcome/{order:Int}" page={FlashcardFlashcardWelcomePage} name="flashcardWelcome" />
         <Route path="/flashcard/{username}" page={FlashcardFlashcardUserPage} name="flashcardUser" />
         <Route path="/flashcard/{username}/{topic}" page={FlashcardFlashcardPage} name="flashcard" />
         <Route path="/flashcard/{username}/{topic}/{order:Int}" page={FlashcardFlashcardPage} name="flashcard" />
