@@ -11,7 +11,9 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { Tooltip } from '@chakra-ui/tooltip'
+import { useAuth } from '@redwoodjs/auth'
 import FlashcardTopicsCell from 'src/components/Flashcard/FlashcardTopicsCell'
+import usernameFromUserObject from 'src/util/usernameFromUserObject'
 
 interface Props {
   username: string
@@ -20,6 +22,9 @@ interface Props {
 
 const FlashcardSelectTopic: React.FunctionComponent<Props> = ({ username }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isAuthenticated, currentUser } = useAuth()
+  const isAuthorizedToEditAddDelete =
+    isAuthenticated && username === usernameFromUserObject(currentUser)
 
   return (
     <>
@@ -34,15 +39,19 @@ const FlashcardSelectTopic: React.FunctionComponent<Props> = ({ username }) => {
       <Modal size="xs" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader color="blue.600">Create or Select a Topic</ModalHeader>
+          <ModalHeader color="blue.600">Topics by {username}</ModalHeader>
           <ModalCloseButton color="blue.600" />
           <ModalBody>
-            <Text color="blue.600">
-              <ChakraLink color="blue.600" href={`/new-topic/${username}`}>
-                Create New Topic
-              </ChakraLink>
-            </Text>
-            <Box p={1} />
+            {isAuthorizedToEditAddDelete && (
+              <>
+                <Text color="blue.600">
+                  <ChakraLink color="blue.600" href={`/new-topic/${username}`}>
+                    Create New Topic
+                  </ChakraLink>
+                </Text>
+                <Box p={1} />
+              </>
+            )}
             <Divider />
             <Box p={1} />
             <FlashcardTopicsCell username={username} />

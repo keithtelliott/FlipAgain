@@ -17,6 +17,8 @@ import FlashcardInfo from 'src/components/Flashcard/FlashcardInfo/FlashcardInfo'
 import FlashcardButtonEdit from 'src/components/Flashcard/FlashcardButtonEdit/FlashcardButtonEdit'
 import FlashcardButtonNew from 'src/components/Flashcard/FlashcardButtonNew/FlashcardButtonNew'
 import FlashcardSelectTopic from 'src/components/Flashcard/FlashcardSelectTopic/FlashcardSelectTopic'
+import { useAuth } from '@redwoodjs/auth'
+import usernameFromUserObject from 'src/util/usernameFromUserObject'
 
 const ZERO_FLASHCARD_LIST_LENGTH = 0 // If the stack of flashcards is empty, some buttons are disabled
 
@@ -56,6 +58,9 @@ const Flashcard: React.FunctionComponent<Props> = ({
   flashcardListLength,
 }) => {
   const [isShowingFront, setIsShowingFront] = useState(true)
+  const { isAuthenticated, currentUser } = useAuth()
+  const isAuthorizedToEditAddDelete =
+    isAuthenticated && username === usernameFromUserObject(currentUser)
 
   useEffect(() => {
     setIsShowingFront(true)
@@ -186,22 +191,29 @@ const Flashcard: React.FunctionComponent<Props> = ({
           />
         </ButtonGroup>
         <ButtonGroup variant="outline" colorScheme="blue" size="sm">
-          <FlashcardButtonEdit
-            isDisabled={flashcardListLength === ZERO_FLASHCARD_LIST_LENGTH}
-            order={order}
-            username={username}
-            topic={topic}
-          />
-          <FlashcardButtonNew username={username} topic={topic} />
+          {isAuthorizedToEditAddDelete && (
+            <>
+              <FlashcardButtonEdit
+                isDisabled={flashcardListLength === ZERO_FLASHCARD_LIST_LENGTH}
+                order={order}
+                username={username}
+                topic={topic}
+              />
+              <FlashcardButtonNew username={username} topic={topic} />
 
-          <Tooltip label="Remove" background="blue.500">
-            <IconButton
-              isDisabled={flashcardListLength === ZERO_FLASHCARD_LIST_LENGTH}
-              aria-label="Delete flashcard"
-              icon={<MinusIcon />}
-              onClick={() => onDeleteClick(flashcard.id)}
-            />
-          </Tooltip>
+              <Tooltip label="Remove" background="blue.500">
+                <IconButton
+                  isDisabled={
+                    flashcardListLength === ZERO_FLASHCARD_LIST_LENGTH
+                  }
+                  aria-label="Delete flashcard"
+                  icon={<MinusIcon />}
+                  onClick={() => onDeleteClick(flashcard.id)}
+                />
+              </Tooltip>
+            </>
+          )}
+
           <FlashcardSelectTopic
             // defaultTopic={flashcard.topic}
             // topics={topics}

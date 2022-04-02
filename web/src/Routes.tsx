@@ -14,7 +14,11 @@ const Routes = () => {
   return (
     <Router>
       <Set wrap={FlipAgainLayout}>
+        <Route path="/" page={HomePage} name="home" />
+        <Route notfound page={NotFoundPage} />
         <Route path="/signin" page={SigninPage} name="signin" />
+        <Route path="/flashcard/FlipAgain/Welcome/{order:Int}" page={FlashcardFlashcardWelcomePage} name="flashcardWelcome" />
+
         <Route path="/flashcard/{username}" page={FlashcardFlashcardUserPage} name="flashcardUser" />
         <Route path="/flashcard/{username}/{topic}" page={FlashcardFlashcardPage} name="flashcard" />
         <Route path="/flashcard/{username}/{topic}/{order:Int}" page={FlashcardFlashcardPage} name="flashcard" />
@@ -24,8 +28,6 @@ const Routes = () => {
         <Route path="/flashcards" page={FlashcardFlashcardsPage} name="flashcards" />
         <Route path="/new-topic/{username}" page={FlashcardNewTopicPage} name="newTopic" />
       </Set>
-      <Route path="/" page={HomePage} name="home" />
-      <Route notfound page={NotFoundPage} />
     </Router>
   )
 }

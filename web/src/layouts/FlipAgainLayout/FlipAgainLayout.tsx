@@ -40,6 +40,10 @@ const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
     console.log('signInWithGoogle, here is the session:  ', session)
     console.log('signInWithGoogle, here is the error:  ', error)
   }
+  // GoDo, KTE, 4/1/2022:  Bug.  Click login, I can see the redir happen, but
+  // the auth does not take effect.  Click a couple more times and then it
+  // takes effect and I'm redirected to the user page as expected.  Maybe create
+  // handleLogIn that waits signInWithGoogle...
 
   async function handleLogOut() {
     await logOut()
