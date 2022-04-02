@@ -1,27 +1,18 @@
-# Redwood
+# FlipAgain
 
-> **NOTICE:** RedwoodJS is very close to a stable version 1.0. In the last two years,
-> the project has matured significantly and is already used in production by a number
-> of startups. We intend to have a 1.0 release candidate before the end of 2021 and
-> to release a truly production-ready 1.0 in early 2022.
+FlipAgain is a virtual equivalent of a simple stack of flashcards.  Flashcards are study aides - notecards with a question on one side and an answer on the other.  I use them to help remember new concepts.
 
-## Getting Started
-- [Tutorial](https://redwoodjs.com/tutorial/welcome-to-redwood): getting started and complete overview guide.
-- [Docs](https://redwoodjs.com/docs/introduction): using the Redwood Router, handling assets and files, list of command-line tools, and more.
-- [Redwood Community](https://community.redwoodjs.com): get help, share tips and tricks, and collaborate on everything about RedwoodJS.
+## Features
 
-### Setup
+### Create & Categorize
 
-We use Yarn as our package manager. To get the dependencies installed, just do this in the root directory:
+Create a stack of new flashcards.  Add/Edit/Remove and categorize by topic.
+### Browse & Flip
 
-```terminal
-yarn install
-```
+Browse existing flashcards one-by-one, flipping them from front to back.
+### Signup & Share
 
-### Fire it up
+Signup with a username to store flashcards in cloud-based storage.  Share flashcards with friends.
 
-```terminal
-yarn redwood dev
-```
 
-Your browser should open automatically to `http://localhost:8910` to see the web app. Lambda functions run on `http://localhost:8911` and are also proxied to `http://localhost:8910/.redwood/functions/*`.
+Keith Elliott, created on April 2, 2021 and updated exactly one year later on April 2, 2022 - slow and steady :)
