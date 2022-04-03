@@ -1,7 +1,7 @@
 export default interface FlashcardInterface {
-  readonly id: string
-  readonly back: string
-  readonly front: string
+  readonly id: number
+  readonly front?: string
+  readonly back?: string
   readonly topic: string
   readonly username: string
 }
