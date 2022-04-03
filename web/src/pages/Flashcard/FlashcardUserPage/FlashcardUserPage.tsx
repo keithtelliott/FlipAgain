@@ -14,15 +14,19 @@ const FlashcardUserPage = ({ username }) => {
         <VStack margin="auto">
           {isAuthenticated && username === usernameFromUserObject(currentUser) && (
             <>
-              <Text color="gray.600">Welcome {currentUser?.email}</Text>
-              <Text color="blue.600">
+              <Text fontSize="xl" color="gray.600">
+                Welcome {currentUser?.email}
+              </Text>
+              <Text fontSize="xl" color="blue.600">
                 <ChakraLink color="blue.600" href={`/new-topic/${username}`}>
                   Create New Flashcard or Topic
                 </ChakraLink>
               </Text>
             </>
           )}
-          <Text color="gray.600">Topics by {username}: </Text>
+          <Text fontSize="xl" color="gray.600">
+            Topics by {username}:{' '}
+          </Text>
           <FlashcardTopicsCell username={username} />
         </VStack>
       </FlashcardBox>

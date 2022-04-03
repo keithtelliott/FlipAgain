@@ -31,7 +31,7 @@ const HomePage = () => {
     </FlashcardBox>
   ) : (
     <Flashcard
-      username={'HelloFlipAgain'}
+      username={'helloflipagain'}
       topic={'Welcome'}
       order={1}
       flashcard={defaultFlashcards[0]}

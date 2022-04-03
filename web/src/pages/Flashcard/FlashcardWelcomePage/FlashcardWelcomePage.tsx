@@ -6,7 +6,7 @@ import defaultFlashcards from 'src/util/defaultFlashcards'
 const FlashcardWelcomePage = ({ order }) => {
   return (
     <Flashcard
-      username={'HelloFlipAgain'}
+      username={'helloflipagain'}
       topic={'Welcome'}
       order={order}
       flashcard={defaultFlashcards[order - 1]} // I use 1 as the first numbered flashcard in the list, but javascript users zero as the numerical position of the first element in an array

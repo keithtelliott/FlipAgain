@@ -36,10 +36,9 @@ const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
   async function signInWithGoogle() {
     const { user, session, error } = await logIn({
       provider: 'google',
+      redirectTo:
+        window.location.protocol + '//' + window.location.host + '/welcome',
     })
-    console.log('signInWithGoogle, here is the user:  ', user)
-    console.log('signInWithGoogle, here is the session:  ', session)
-    console.log('signInWithGoogle, here is the error:  ', error)
   }
   // GoDo, KTE, 4/1/2022:  Bug.  Click login, I can see the redir happen, but
   // the auth does not take effect.  Click a couple more times and then it
