@@ -9,9 +9,16 @@ const defaultFlashcards: FlashcardInterface[] = [
     username: 'FlipAgain',
   },
   {
+    id: 15,
+    front: 'This is a tool to help you learn',
+    back: 'Learn new things faster!',
+    topic: 'Welcome',
+    username: 'FlipAgain',
+  },
+  {
     id: 2,
-    front: 'Click Edit / Add / Remove to create your own!',
-    back: "It's a tool to help you learn new things, or to help you communicate",
+    front: 'Sign in to create your own topics and flashcards',
+    back: 'Add/Edit/Remove buttons appear upon Sign in',
     topic: 'Welcome',
     username: 'FlipAgain',
   },
@@ -36,41 +43,10 @@ const defaultFlashcards: FlashcardInterface[] = [
     topic: 'Welcome',
     username: 'FlipAgain',
   },
-  // {
-  //   id: 6,
-  //   front:
-  //     "You can follow the app development via my YouTube <a href='https://youtu.be/Q4BnWK05H5w'>videos</a>.",
-  //   back: '... No seat belt needed, because it is Slow Coding with Keith :)',
-  //   topic: 'Welcome',
-  //   username: 'FlipAgain',
-  // },
-  // {
-  //   id: 7,
-  //   front: 'You can follow follow me on Twitter at @KeithTElliott',
-  //   back: 'Please send me suggestions and requests.',
-  //   topic: 'Welcome',
-  //   username: 'FlipAgain',
-  // },
-  // {
-  //   id: 8,
-  //   front: 'I hope you join me in my journey to create a useful learning tool!',
-  //   back: 'What fun!',
-  //   topic: 'Welcome',
-  //   username: 'FlipAgain',
-  // },
-  {
-    id: 9,
-    front:
-      "Technical note:  Your flashcards are stored in your browser's local storage.  Future versions of the app...",
-    back: '...will provide more robust cloud-based storage options, to facilitate sharing your flashcards with others, and across different devices.  ',
-    topic: 'Welcome',
-    username: 'FlipAgain',
-  },
   {
     id: 10,
-    front:
-      'Another technical note:  I am developing this app with encouragement from my friends in the RedwoodJS community.  You can checkout the code...',
-    back: '...at github.com/keithtelliott/FlipAgain',
+    front: 'Technical Tidbit:  This is a Redwood app.  Checkout the code at...',
+    back: 'github.com/keithtelliott/FlipAgain',
     topic: 'Welcome',
     username: 'FlipAgain',
   },
@@ -81,29 +57,6 @@ const defaultFlashcards: FlashcardInterface[] = [
     topic: 'Welcome',
     username: 'FlipAgain',
   },
-
-  {
-    id: 12,
-    front: '37 + 43',
-    back: '80',
-    topic: 'Addition Practice',
-    username: 'FlipAgain',
-  },
-  {
-    id: 13,
-    front: '45 + 93',
-    back: '138',
-    topic: 'Addition Practice',
-    username: 'FlipAgain',
-  },
-  // {
-  //   id: 14,
-  //   front:
-  //     '1234567890 1234567890 1234567890 1234567890 1234567890 1234567890 1234567890 1234567890 1234567890 ',
-  //   back: 'Flipped!  Click Next and Previous to move',
-  //   topic: 'Welcome',
-  //   username: 'FlipAgain',
-  // },
 ]
 
 export default defaultFlashcards
