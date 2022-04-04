@@ -71,13 +71,17 @@ const Flashcard: React.FunctionComponent<Props> = ({
       console.log('deleteFlashcard.onCompleted, about to navigate...')
 
       // toast.success('Flashcard deleted')
-      navigate(
-        routes.flashcard({
-          username: username,
-          topic: encodeURIComponent(topic),
-          order: order - ONE_FLASHCARD_REMOVED,
-        })
-      )
+      if (order === 1 && flashcardListLength === 1) {
+        navigate(routes.flashcardUser({ username }))
+      } else {
+        navigate(
+          routes.flashcard({
+            username: username,
+            topic: encodeURIComponent(topic),
+            order: order - ONE_FLASHCARD_REMOVED,
+          })
+        )
+      }
     },
     onError: (error) => {
       console.log(error.message)
