@@ -15,5 +15,9 @@ Browse existing flashcards one-by-one, flipping them from front to back.
 
 Signup with a username to store flashcards in cloud-based storage.  Share flashcards with friends.
 
+### Tech Notes
+
+It's a [Redwood](https://redwoodjs.com) app!  The front end is deployed on [Netlify](https://netlify.com).  The database and auth are provided by [Supabase](https://supabase.com).  Styling is via [Chakra UI](https://chakra-ui.com).
+
 
 Keith Elliott, created on April 2, 2021 and updated exactly one year later on April 2, 2022 - slow and steady :)

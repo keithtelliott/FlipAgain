@@ -35,9 +35,9 @@ export const schema = gql`
   }
 
   type Mutation {
-    createFlashcard(input: CreateFlashcardInput!): Flashcard! @skipAuth
+    createFlashcard(input: CreateFlashcardInput!): Flashcard! @requireAuth
     updateFlashcard(id: Int!, input: UpdateFlashcardInput!): Flashcard!
-      @skipAuth
-    deleteFlashcard(id: Int!): Flashcard! @skipAuth
+      @requireAuth
+    deleteFlashcard(id: Int!): Flashcard! @requireAuth
   }
 `
