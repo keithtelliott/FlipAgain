@@ -2,6 +2,7 @@ import { Button } from '@chakra-ui/button'
 import { useDisclosure } from '@chakra-ui/hooks'
 import { HamburgerIcon, MinusIcon } from '@chakra-ui/icons'
 import { Image } from '@chakra-ui/image'
+import { IconButton } from '@chakra-ui/react'
 import {
   Box,
   Flex,
@@ -23,6 +24,7 @@ import {
 import { useAuth } from '@redwoodjs/auth'
 import { Link as RedwoodLink, navigate, routes } from '@redwoodjs/router'
 import { FcGoogle } from 'react-icons/fc'
+import { FaRegUser } from 'react-icons/fa'
 
 type FlipAgainLayoutProps = {
   children?: React.ReactNode
@@ -31,7 +33,7 @@ type FlipAgainLayoutProps = {
 const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const { logIn, client, logOut, isAuthenticated } = useAuth()
+  const { logIn, client, logOut, isAuthenticated, loading } = useAuth()
 
   async function signInWithGoogle() {
     const { user, session, error } = await logIn({
@@ -70,7 +72,16 @@ const FlipAgainLayout = ({ children }: FlipAgainLayoutProps) => {
           </HStack>
           <Spacer />
           <HStack spacing={1}>
-            {isAuthenticated ? (
+            {loading ? (
+              <IconButton
+                variant="outline"
+                colorScheme="blue"
+                size="sm"
+                isDisabled={true}
+                aria-label="Loading User Authentication Info"
+                icon={<FaRegUser />}
+              />
+            ) : isAuthenticated ? (
               <Button
                 variant="outline"
                 colorScheme="blue"
